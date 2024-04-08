@@ -1,6 +1,6 @@
 package com.dojo.contas;
 
-import java.time.LocalDateTime;
+import java.time.LocalDateTime; 
 
 public class ContaInvestimento extends Conta{
     private LocalDateTime primeiroDeposito;
@@ -22,12 +22,11 @@ public class ContaInvestimento extends Conta{
 
     @Override
     public boolean deposito(double valor) {
-
         return false;
     }
 
-    @Override
-    public boolean saque(double valor) {
-        return false;
-    }
+    // @Override
+    // public boolean saque(double valor) {
+    //     return false;
+    // }
 }

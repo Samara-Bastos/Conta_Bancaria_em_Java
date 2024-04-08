@@ -9,7 +9,7 @@ public abstract  class Conta {
 
     private double saldo;
 
-    public int getNumero() {
+    public int getNumero() { 
         return numero;
     }
 
@@ -29,8 +29,6 @@ public abstract  class Conta {
         return saldo;
     }
 
-    
-
     public Conta(int numero, String agencia, double saldo){
         this.numero = numero;
         this.agencia = agencia;
@@ -39,7 +37,10 @@ public abstract  class Conta {
 
     public abstract boolean deposito(double valor);
 
-    public abstract boolean saque(double valor);
+    public void sacar(double valor) {
+        saldo -= valor;
+        System.out.println("Saque de " + valor + " realizado com sucesso.");
+    }
 
     public double consultaSaldo(){
         return this.saldo;

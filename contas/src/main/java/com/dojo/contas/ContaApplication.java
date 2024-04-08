@@ -9,9 +9,9 @@ public class ContaApplication {
 
 	public static void main(String[] args) {
 
-		Conta conta = new ContaInvestimento(1111111,"1020-9", 1029.00);
-
-		System.out.println(conta);
+		Conta conta = new ContaPoupanca(1111111,"1020-9", 1000.00);
+		
+		System.out.println("Tudo bom ?");
 
 	}
 
