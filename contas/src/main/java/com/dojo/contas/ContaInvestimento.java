@@ -6,7 +6,7 @@ public class ContaInvestimento extends Conta{
     private LocalDateTime primeiroDeposito;
 
     public ContaInvestimento(int numero, String agencia, double depositoInicial) {
-        super(numero, agencia, depositoInicial);
+        super(depositoInicial);
         if (depositoInicial < 1000) {
             throw new RuntimeException("O valor do deposito inicial deve ser maior que 1000");
         }

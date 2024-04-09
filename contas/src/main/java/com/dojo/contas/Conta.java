@@ -29,9 +29,7 @@ public abstract  class Conta {
         return saldo;
     }
 
-    public Conta(int numero, String agencia, double saldo){
-        this.numero = numero;
-        this.agencia = agencia;
+    public Conta(double saldo){
         this.saldo = saldo;
     }
 
