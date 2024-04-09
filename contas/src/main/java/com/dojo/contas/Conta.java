@@ -2,57 +2,40 @@ package com.dojo.contas;
 
 
 public abstract  class Conta {
-
-    private int numero;
-
-    private String agencia;
-
     private double saldo;
-
-    public int getNumero() { 
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public String getAgencia() {
-        return agencia;
-    }
-
-    public void setAgencia(String agencia) {
-        this.agencia = agencia;
-    }
 
     public double getSaldo() {
         return saldo;
     }
 
-    public Conta(int numero, String agencia, double saldo){
-        this.numero = numero;
-        this.agencia = agencia;
-        this.saldo = saldo;
+    public void setSaldo(double novoSaldo) {
+        saldo = novoSaldo;
     }
-
-    public abstract boolean deposito(double valor);
 
     public void sacar(double valor) {
         saldo -= valor;
         System.out.println("Saque de " + valor + " realizado com sucesso.");
     }
 
+    public void depositar(double valor) {
+        saldo += valor;
+        System.out.println("Deposito de " + valor + " realizado com sucesso.");
+    }
+
+    public Conta(double saldo){
+        this.saldo = saldo;
+    }
+
     public double consultaSaldo(){
         return this.saldo;
     }
 
+    public boolean cambioContas(Conta conta, double valor) { return false; }
 
     @Override
     public String toString() {
         return "Conta{" +
-                "numero=" + numero +
-                ", agencia='" + agencia + '\'' +
-                ", saldo=" + saldo +
+                "saldo=" + saldo +
                 '}';
     }
 }
