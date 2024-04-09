@@ -26,6 +26,10 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
+**/contas.zip:SmartScreen
+**/contas.zip:Zone.Identifier
+**/README.md
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

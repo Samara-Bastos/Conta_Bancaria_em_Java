@@ -30,7 +30,6 @@ public abstract  class Conta {
         return this.saldo;
     }
 
-
     @Override
     public String toString() {
         return "Conta{" +
