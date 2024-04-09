@@ -16,7 +16,8 @@ public class ContaInvestimento extends Conta {
 
     public boolean saque(double valor) {
         LocalDateTime agora = LocalDateTime.now();
-        long diasDesdePrimeiroDeposito = ChronoUnit.DAYS.between(primeiroDeposito, agora);;
+        long diasDesdePrimeiroDeposito = ChronoUnit.DAYS.between(primeiroDeposito, agora);
+        ;
         if (diasDesdePrimeiroDeposito < 1) {
             throw new RuntimeException("É permitido sacar somente após 1 dia do primeiro depósito");
         }
@@ -28,7 +29,7 @@ public class ContaInvestimento extends Conta {
     }
 
     public double mostraSaldo() {
-        LocalDateTime agora = LocalDateTime.of(2024,4, 11, 23, 59);
+        LocalDateTime agora = LocalDateTime.of(2024, 4, 11, 23, 59);
         long diasDesdePrimeiroDeposito = ChronoUnit.DAYS.between(primeiroDeposito, agora);
         double saldoAtualizado = super.consultaSaldo();
         System.out.println("conta dias:" + diasDesdePrimeiroDeposito);
@@ -51,4 +52,15 @@ public class ContaInvestimento extends Conta {
         return false;
     }
 
+    @Override
+    public boolean cambioContas(Conta conta, double valor) {
+        if (valor > conta.getSaldo()) {
+           throw new RuntimeException("Transferência não permitida, saldo insuficiente");
+        }
+        double saldoAposEnvio = conta.getSaldo() - valor;
+        conta.setSaldo(saldoAposEnvio);
+        double novoSaldo = valor + this.getSaldo();
+        this.setSaldo(novoSaldo);
+        return true;
+    }
 }

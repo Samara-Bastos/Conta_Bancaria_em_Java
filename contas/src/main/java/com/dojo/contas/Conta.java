@@ -30,6 +30,8 @@ public abstract  class Conta {
         return this.saldo;
     }
 
+    public boolean cambioContas(Conta conta, double valor) { return false; }
+
     @Override
     public String toString() {
         return "Conta{" +
