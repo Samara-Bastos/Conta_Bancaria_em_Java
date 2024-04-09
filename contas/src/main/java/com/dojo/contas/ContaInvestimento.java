@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 public class ContaInvestimento extends Conta{
     private LocalDateTime primeiroDeposito;
 
-    public ContaInvestimento(int numero, String agencia, double depositoInicial) {
-        super(numero, agencia, depositoInicial);
+    public ContaInvestimento(double depositoInicial) {
+        super(depositoInicial);
         if (depositoInicial < 1000) {
             throw new RuntimeException("O valor do deposito inicial deve ser maior que 1000");
         }
@@ -20,14 +20,8 @@ public class ContaInvestimento extends Conta{
         this.primeiroDeposito = primeiroDeposito;
     }
 
-    @Override
-    public boolean deposito(double valor) {
-
-        return false;
-    }
-
-    @Override
-    public boolean saque(double valor) {
-        return false;
+    public boolean consultaSaldoInvestimento() {
+        super.consultaSaldo();
+        return true;
     }
 }

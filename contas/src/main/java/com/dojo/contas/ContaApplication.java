@@ -2,16 +2,23 @@ package com.dojo.contas;
 
 import com.dojo.contas.Conta;
 import com.dojo.contas.ContaInvestimento;
+import com.dojo.contas.ContaPoupanca;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class ContaApplication {
 
 	public static void main(String[] args) {
 
-		Conta conta = new ContaInvestimento(1111111,"1020-9", 1029.00);
+		ContaPoupanca contaP = new ContaPoupanca(100.00);
+		System.out.println();
 
-		System.out.println(conta);
+		boolean consultandoSaldo = contaP.consultaSaldoPoupanca();
+
+		if(consultandoSaldo){
+			System.out.println(contaP);
+		}
 
 	}
 
