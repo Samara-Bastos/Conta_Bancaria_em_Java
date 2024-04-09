@@ -18,7 +18,12 @@ public class ContaApplication {
 		ContaInvestimento contaIn = new ContaInvestimento(5000);
 		contas.add(contaIn);
 
-		System.out.println(usuario01.getSaldoTotal());
+		contaIn.cambioContas(cont1,contaIn.getSaldo());
+
+		cont1.saque(6050.0);
+
+		System.out.println(contaIn.getSaldo()+" esse é o saldo da investimento");
+		System.out.println(cont1.getSaldo()+" esse é o saldo da corrente");
 	}
 
 }

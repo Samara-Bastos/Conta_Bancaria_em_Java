@@ -8,7 +8,7 @@ public class ContaInvestimento extends Conta {
 
     public ContaInvestimento(double depositoInicial) {
         super(depositoInicial);
-        this.primeiroDeposito = LocalDateTime.now();
+        this.primeiroDeposito = LocalDateTime.of(2024, 4, 7, 23, 59);
         if (depositoInicial < 1000) {
             throw new RuntimeException("O valor do deposito inicial deve ser maior que 1000");
         }
@@ -21,10 +21,10 @@ public class ContaInvestimento extends Conta {
         if (diasDesdePrimeiroDeposito < 1) {
             throw new RuntimeException("É permitido sacar somente após 1 dia do primeiro depósito");
         }
-        if (valor > super.getSaldo()) {
+        if (valor > this.getSaldo()) {
             throw new RuntimeException("Não é possível sacar mais do que o saldo disponível");
         }
-        super.sacar(valor);
+        this.sacar(valor);
         return true;
     }
 
@@ -54,13 +54,13 @@ public class ContaInvestimento extends Conta {
 
     @Override
     public boolean cambioContas(Conta conta, double valor) {
-        if (valor > conta.getSaldo()) {
+        if (valor > this.getSaldo()) {
            throw new RuntimeException("Transferência não permitida, saldo insuficiente");
         }
-        double saldoAposEnvio = conta.getSaldo() - valor;
-        conta.setSaldo(saldoAposEnvio);
-        double novoSaldo = valor + this.getSaldo();
-        this.setSaldo(novoSaldo);
+        double saldoAposEnvio = this.getSaldo() - valor;
+        this.setSaldo(saldoAposEnvio);
+        double novoSaldo = valor + conta.getSaldo();
+        conta.setSaldo(novoSaldo);
         return true;
     }
 }
