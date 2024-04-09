@@ -20,7 +20,6 @@ public class ContaCorrente extends Conta {
         return getSaldo();
     }
 
-    @Override
     public boolean deposito(double valor) {
         return false;
     }

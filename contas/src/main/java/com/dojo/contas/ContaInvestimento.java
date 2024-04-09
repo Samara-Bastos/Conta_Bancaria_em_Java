@@ -47,13 +47,8 @@ public class ContaInvestimento extends Conta {
         this.primeiroDeposito = primeiroDeposito;
     }
 
-    @Override
     public boolean deposito(double valor) {
         return false;
     }
 
-    // @Override
-    // public boolean saque(double valor) {
-    //     return false;
-    // }
 }
