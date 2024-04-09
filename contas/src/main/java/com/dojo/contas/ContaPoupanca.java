@@ -51,4 +51,16 @@ public class ContaPoupanca extends Conta {
         super.consultaSaldo();
         return true;
     }
+
+    @Override
+    public boolean cambioContas(Conta conta, double valor) {
+        if (valor > conta.getSaldo()) {
+            throw new RuntimeException("Transferência não permitida, saldo insuficiente");
+        }
+        double saldoAposEnvio = conta.getSaldo() - valor;
+        conta.setSaldo(saldoAposEnvio);
+        double novoSaldo = valor + this.getSaldo();
+        this.setSaldo(novoSaldo);
+        return true;
+    }
 }
