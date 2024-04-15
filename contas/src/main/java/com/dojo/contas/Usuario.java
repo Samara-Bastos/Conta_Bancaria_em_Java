@@ -2,7 +2,6 @@ package com.dojo.contas;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.dojo.contas.Conta;
 
 public class Usuario {
 

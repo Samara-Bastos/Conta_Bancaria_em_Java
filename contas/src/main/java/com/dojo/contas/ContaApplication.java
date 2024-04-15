@@ -1,7 +1,7 @@
 package com.dojo.contas;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,18 +12,18 @@ public class ContaApplication {
 		List<Conta> contas = new ArrayList<>();
 			
 		Usuario usuario01 = new Usuario(contas);
-		ContaCorrente cont1 = new ContaCorrente(1000);
-		contas.add(cont1);
-
-		ContaInvestimento contaIn = new ContaInvestimento(5000);
+		ContaCorrente contC = new ContaCorrente(1000);
+		contas.add(contC);
+		ContaInvestimento contaIn = new ContaInvestimento(1000);
 		contas.add(contaIn);
 
-		contaIn.cambioContas(cont1,contaIn.getSaldo());
+		contaIn.transferir(contC,contaIn.getSaldo());
+		contC.sacar(contC.getSaldo()+450);
 
-		cont1.saque(6050.0);
+		
+		
+		System.out.println("\n Essas são as contas do usuario: \n"+contas);
 
-		System.out.println(contaIn.getSaldo()+" esse é o saldo da investimento");
-		System.out.println(cont1.getSaldo()+" esse é o saldo da corrente");
-	}
+	} 
 
 }
