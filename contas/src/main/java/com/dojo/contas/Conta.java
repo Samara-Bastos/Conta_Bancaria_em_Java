@@ -1,41 +1,48 @@
 package com.dojo.contas;
 
 
-public abstract  class Conta {
-    private double saldo;
-
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(double novoSaldo) {
-        saldo = novoSaldo;
-    }
-
-    public void sacar(double valor) {
-        saldo -= valor;
-        System.out.println("Saque de " + valor + " realizado com sucesso.");
-    }
-
-    public void depositar(double valor) {
-        saldo += valor;
-        System.out.println("Deposito de " + valor + " realizado com sucesso.");
-    }
+public abstract  class Conta implements Operacoes {
+    protected double saldo;
 
     public Conta(double saldo){
         this.saldo = saldo;
     }
 
-    public double consultaSaldo(){
+    public double getSaldo() {
         return this.saldo;
     }
 
-    public boolean cambioContas(Conta conta, double valor) { return false; }
+    public void setSaldo(double novoSaldo) {
+        this.saldo = novoSaldo;
+    } 
+
+    @Override
+    public void sacar(double valor) {
+        if(valor > this.saldo){
+            throw new RuntimeException("Saldo insuficiente");
+        }
+        double novoSaldo = this.saldo -= valor;
+        this.setSaldo(novoSaldo);
+    } 
+
+    @Override
+    public void depositar(double valor) { 
+        double novoSaldo = this.saldo += valor;
+        this.setSaldo(novoSaldo);
+    }
+
+
+    @Override
+    public void transferir(Conta conta, double valor) {
+        this.sacar(valor);
+        conta.depositar(valor);
+        System.out.println("Transferência realizada com sucesso");
+    }  
 
     @Override
     public String toString() {
         return "Conta{" +
-                "saldo=" + saldo +
+                "saldo=" + this.getSaldo() +
                 '}';
     }
 }

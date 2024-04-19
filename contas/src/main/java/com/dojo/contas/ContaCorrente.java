@@ -4,35 +4,18 @@ public class ContaCorrente extends Conta {
 
     public ContaCorrente(double saldo) {
         super(saldo);
-    }
+    } 
 
-   public boolean saque(double valor) {
+    @Override
+   public void sacar(double valor) {
         double calcSaldo = getSaldo() - valor;
         if ( calcSaldo < -500  ) {
             throw new RuntimeException("Saldo insuficiente para saque");
 
         }
-        super.sacar(valor);
-        return true;
-    }
-
-    public double mostraSaldo(){
-        return getSaldo();
-    }
-
-    public boolean deposito(double valor) {
-        return false;
-    }
-
-    @Override
-    public boolean cambioContas(Conta conta, double valor) {
-        if (valor > conta.getSaldo()) {
-            throw new RuntimeException("Transferência não permitida, saldo insuficiente");
-        }
-        double saldoAposEnvio = conta.getSaldo() - valor;
-        conta.setSaldo(saldoAposEnvio);
-        double novoSaldo = valor + this.getSaldo();
+        double novoSaldo = this.saldo -= valor;
         this.setSaldo(novoSaldo);
-        return true;
-    }
+        System.out.println("Saque de " + valor + " realizado com sucesso.");
+    } 
+
 }

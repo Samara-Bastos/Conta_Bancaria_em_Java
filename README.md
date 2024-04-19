@@ -1,35 +1,3 @@
-[14:15] Victor Hugo Ferreira Silva
-# Usuario
-- nome: String
-- cpf: String
-- idade: int
-- Conta:
-- ContaInvestimento:
-- contas: List<Conta>
-- consultaSaldoTotal(): double
- 
-# Conta (Abstrata)
-- numero: int
-- agencia: String
-- saldo: double
-- primeiroDeposito: LocalDateTime
-- deposito(valor: double): boolean
-- saque(valor: double): boolean
-- consulta(): double
- 
-# ContaCorrente (Concreta)
- 
- 
-# ContaPoupança (Concreta)
- - saque
- 
-# ContaInvestimento (Concreta)
-contaInvestimento(valor: double > 1000, primeiroDeposito: LocalDateTime.now()): ContaInvestimento
-* Saldo aumenta 10% por dia
-
-
-<!-- ----- -->
-
 Sistema de controle de contas
 
 O desafio não representa um sistema real, apenas simula condições para exercitar a prática do POO
@@ -52,7 +20,7 @@ Tendo isso em vista, o desafio deve conter o uso de herança, implementação de
 
 - O sistema deve permitir as seguintes operações nas contas vinculadas ao usuário:
 
-    - Depósito de valores.
+    - Depósito de valores. 
 
     - Saque de valores.
 
@@ -106,7 +74,6 @@ Tendo isso em vista, o desafio deve conter o uso de herança, implementação de
 
     
 
-    
 
 # Agora vamos testar nossa aplicação: 
 

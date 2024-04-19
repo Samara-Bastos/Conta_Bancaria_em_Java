@@ -1,66 +1,57 @@
 package com.dojo.contas;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class ContaInvestimento extends Conta {
-    private LocalDateTime primeiroDeposito;
-
+    private LocalDate primeiroDeposito;
+    private LocalDate novaData;
+    private double juros = 0.10;
+    public LocalDate agora = LocalDate.now();
+ 
     public ContaInvestimento(double depositoInicial) {
         super(depositoInicial);
-        this.primeiroDeposito = LocalDateTime.of(2024, 4, 7, 23, 59);
+        this.primeiroDeposito = LocalDate.now().minusDays(2);
+        this.novaData = this.primeiroDeposito;
+
         if (depositoInicial < 1000) {
             throw new RuntimeException("O valor do deposito inicial deve ser maior que 1000");
         }
     }
 
-    public boolean saque(double valor) {
-        LocalDateTime agora = LocalDateTime.now();
+    @Override
+    public double getSaldo() {
+        if (calculaDiferencaDias() > 0) {
+            aplicarJuros();
+        }
+        return this.saldo;
+    }
+
+    @Override
+    public void sacar(double valor) { 
         long diasDesdePrimeiroDeposito = ChronoUnit.DAYS.between(primeiroDeposito, agora);
-        ;
+
         if (diasDesdePrimeiroDeposito < 1) {
             throw new RuntimeException("É permitido sacar somente após 1 dia do primeiro depósito");
         }
         if (valor > this.getSaldo()) {
-            throw new RuntimeException("Não é possível sacar mais do que o saldo disponível");
+            throw new RuntimeException("Não é possível sacar, saldo insuficiente");
         }
-        this.sacar(valor);
-        return true;
+        double novoSaldo = this.saldo -= valor;
+        this.setSaldo(novoSaldo);
+
+        System.out.println("Saque de " + valor + " realizado com sucesso.");
+    }    
+
+    public void aplicarJuros() {
+        double montante = this.saldo* Math.pow((1 + juros), calculaDiferencaDias()); 
+        this.setSaldo(montante);
+        this.novaData = agora;
+    } 
+
+    public long calculaDiferencaDias(){
+        long diferencaDias = ChronoUnit.DAYS.between(novaData, agora);
+        return diferencaDias;
     }
 
-    public double mostraSaldo() {
-        LocalDateTime agora = LocalDateTime.of(2024, 4, 11, 23, 59);
-        long diasDesdePrimeiroDeposito = ChronoUnit.DAYS.between(primeiroDeposito, agora);
-        double saldoAtualizado = super.consultaSaldo();
-        System.out.println("conta dias:" + diasDesdePrimeiroDeposito);
-        for (int i = 0; i < diasDesdePrimeiroDeposito; i++) {
-            saldoAtualizado *= 1.10;
-        }
-        return saldoAtualizado;
-    }
-
-
-    public LocalDateTime getPrimeiroDeposito() {
-        return primeiroDeposito;
-    }
-
-    public void setPrimeiroDeposito(LocalDateTime primeiroDeposito) {
-        this.primeiroDeposito = primeiroDeposito;
-    }
-
-    public boolean deposito(double valor) {
-        return false;
-    }
-
-    @Override
-    public boolean cambioContas(Conta conta, double valor) {
-        if (valor > this.getSaldo()) {
-           throw new RuntimeException("Transferência não permitida, saldo insuficiente");
-        }
-        double saldoAposEnvio = this.getSaldo() - valor;
-        this.setSaldo(saldoAposEnvio);
-        double novoSaldo = valor + conta.getSaldo();
-        conta.setSaldo(novoSaldo);
-        return true;
-    }
 }
